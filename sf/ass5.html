@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Assignment 5</title>
+        <script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        ></script>
+        <script>
+            $(()=>{
+                console.log("Dom loaded");
+
+                $("#t1").blur(()=>{
+                    console.log("Blur Event");
+                    let input={accno:$("#t1").val()};
+                    //console.log(input);
+                    let params={
+                        data:input,
+                        url: "http://localhost:1400/Accdetails",
+                        type:'get',
+                        datatype:"text",
+                        success:(datafound)=>{if(datafound.status==true)
+                            {console.log("Success");}
+                            $("#msg").html(datafound.data[0].balance);
+                       },
+                        error:(datanotfound)=>{console.log("Failure");}
+                    };
+                    $.ajax(params);
+                });//end of blur event
+            });//end of dom
+        </script>
+    </head>
+    <body>
+        <input type="text" id="t1"/>
+        <span id="msg" >Balance shown here</span>
+    </body>
+</html>

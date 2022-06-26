@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+    <script>
+        $(() => {
+            console.log("page Loaded");
+
+
+            $("#pincode").blur(
+                    ()=>{
+                console.log("blur Loaded");
+                let ip = { pincode: $("#pincode").val() };
+                let parameterstothefunction =
+                {
+                    data: ip,
+                    url: "http://localhost:1700/pincode",
+                    type: 'get',
+                    dataType: "json",
+                    success: (datagivenbyserver) => {
+                        console.log("data given by server in success" + datagivenbyserver.status)
+                        if (datagivenbyserver.status === true) {
+                        //    $("#city").text("mumbai"); //makeup
+                        $("#city").text(datagivenbyserver.cityname.city); 
+                        }
+                        else {
+                          //  $("#city").text("pune");
+                          $("#city").text("not found");
+                        }
+                    },
+                    error: (errorgivenbyserver) => { console.log("failed to contact server " + errorgivenbyserver.status) }
+                };
+
+                //time to call the function
+                console.log("is the function working");
+                $.ajax(parameterstothefunction);
+
+            });
+
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <input type="text" id="pincode" placeholder="pincode" />
+    <span id="city">Cityname</span>
+
+</body>
+
+</html>

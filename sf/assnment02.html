@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script>
+$(()=>{
+
+
+    let items=[];
+    let parameter={
+
+        data:{},
+        url:"http//localhost:885/getAllitems",
+        type:'get',
+        dataType:"json",
+        success:(Tushar)=>{items=Tushar} ,  
+        error:(error)=>{console.log("failure"+error);},       
+
+    };
+    $.ajax(parameter);
+
+});
+    </script>
+    </head>
+<body>
+    <br />
+    <input type="text" id="itemno" placeholder="item number" />
+    <span id="message"> what happened</span>
+    <br />
+    <input type="text" id="itemname" placeholder="item name" />
+    <br />
+    <input type="text" id="itemprice" placeholder="item price" />
+    <br /><br /><button id="add">Add Item</button>
+    <button id="update">update Item</button>
+    <hr />
+    <p id="contents">all items show it here</p>
+  </body>  
+</body>
+</html>

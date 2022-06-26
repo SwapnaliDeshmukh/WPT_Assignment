@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+      $(() => {
+        $("#loginbutton").click(() => {
+          let input = {
+            username: $("#username").val(),
+            password: $("#password").val(),
+          };
+
+          let parameterfunction = {
+            data: input,
+            url: "http://localhost:1011/login",
+            type: "get",
+            dataType: "json",
+            success: (data) => {
+              console.log("data given by server in success" + data.status);
+              if (data.status === true) {
+                $("#message").text("successful login");
+              } else {
+                $("#message").text("userid or password wrong");
+              }
+            },
+
+            error: (errorgivenbyserver) => {
+              console.log("failed to contact server " + errorgivenbyserver);
+            },
+          };
+
+          console.log("is the function working");
+          $.ajax(parameterfunction);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <br />
+    <input type="text" id="username" placeholder="username" />
+    <br /><br />
+    <input type="text" id="password" placeholder="password" />
+    <button id="loginbutton">check</button>
+    <span id="message">message will be print here</span>
+  </body>
+</html>

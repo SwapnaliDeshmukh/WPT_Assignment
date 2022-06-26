@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <title>Employee Details</title>
+    <script>
+      $(() => {
+        $("#empno").blur(() => {
+          let input = { empno: $("#empno").val() };
+          let parameterfunction = {
+            data: input,
+            url: "http://localhost:1110/employeeDetails",
+            type: "get",
+            dataType: "json",
+            success: (data) => {
+              console.log("data given by server in success" + data);
+
+              if (data.status == true) {
+                $("#msg").text("emp details found");
+                $("#empname").val(data.empdetail.empname);
+                $("#mobileno").val(data.empdetail.mobileno);
+              } else {
+                $("#msg").text("emp details not  found");
+                $("#empname").val("");
+                $("#mobileno").val("");
+              }
+            },
+            error: (error) => {
+              console.log("does not contacting to the server " + error);
+            },
+          };
+          $.ajax(parameterfunction);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Ajax program</h1>
+    employee Number :-
+    <input type="text" id="empno" placeholder="employee Number" /><br /><br />
+    employee Name :-
+    <input type="text" id="empname" placeholder="employee Name" /><br /><br />
+    Mobile Number :-
+    <input type="text" id="mobileno" placeholder="Mobile Number" /><br /><br />
+    <span id="mgs">All Employee Details Shows here</span>
+  </body>
+</html>
